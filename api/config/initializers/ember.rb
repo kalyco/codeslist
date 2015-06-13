@@ -1,3 +1,3 @@
 EmberCLI.configure do |c|
-  c.app :ember, path: '../ember'
+  c.app :client, path: '../client'
 end
