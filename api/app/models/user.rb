@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
   include BCrypt
+  has_many :access_tokens, dependent: :destroy
   has_many :posts
 
   before_save { self.email = email.downcase }

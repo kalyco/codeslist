@@ -1,9 +1,7 @@
 require File.expand_path('../boot', __FILE__)
 
-require "rails"
 # Pick the frameworks you want:
 require "active_model/railtie"
-require "active_job/railtie"
 require "active_record/railtie"
 require "action_controller/railtie"
 require "action_mailer/railtie"
@@ -15,15 +13,8 @@ require "sprockets/railtie"
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
-module Api
+module Foundation
   class Application < Rails::Application
-
-    config.middleware.insert_before 0, "Rack::Cors" do
-      allow do
-        origins '*'
-        resource '*', :headers => :any, :methods => [:get, :post, :put, :delete, :options]
-      end
-    end
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
@@ -37,6 +28,19 @@ module Api
     # config.i18n.default_locale = :de
 
     # Do not swallow errors in after_commit/after_rollback callbacks.
-    config.active_record.raise_in_transactional_callbacks = true
+    config.middleware.insert_before ActionDispatch::Static, Rack::Cors do
+      allow do
+        if Rails.env.production?
+          origins 'https://ember-cli-rails-auth.firebaseapp.com'
+        else
+          origins 'http://localhost:4200'
+        end
+
+        resource '*',
+          headers: :any,
+          methods: [:get, :post, :delete, :put, :options],
+          max_age: 0
+      end
+    end
   end
 end
