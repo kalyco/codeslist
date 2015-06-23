@@ -10,5 +10,9 @@ class User < ActiveRecord::Base
                     uniqueness: { case_sensitive: false }
   validates :password, presence: true, length: { maximum: 50, minimum: 8 }
 
+  def access_token
+    access_tokens.active.first
+  end
+
   has_secure_password
 end
