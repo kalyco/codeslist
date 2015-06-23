@@ -10,6 +10,7 @@ gem 'bcrypt'
 gem 'doorkeeper'
 gem 'ember-cli-rails'
 gem 'normalize-rails'
+gem 'octokit'
 gem 'pg'
 # May be required to specify the path to the 'pg_config' program installed with Postgres:
 #$ bundle config build.pg --with-pg-config=/Applications/Postgres.app/Contents/Versions/9.4/bin/pg_config
@@ -17,6 +18,7 @@ gem 'rack-cors', require: 'rack/cors'
 gem 'rails', '4.2.1'
 gem 'redis'
 gem 'redis-objects'
+gem 'responders'
 gem 'sass-rails', '~> 5.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'sidekiq'
@@ -30,7 +32,6 @@ end
 
 group :development, :test do
   gem 'byebug'
-  gem "capybara"
   gem 'dotenv-rails'
   gem 'factory_girl_rails'
   gem 'faker'
@@ -42,6 +43,7 @@ group :development, :test do
 end
 
 group :test do
+  gem 'coveralls', require: false
   gem 'database_cleaner'
-  gem 'shoulda-matchers'
+  gem 'shoulda-matchers', require: false
 end

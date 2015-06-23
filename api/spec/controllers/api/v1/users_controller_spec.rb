@@ -17,7 +17,7 @@ describe API::V1::UsersController do
 
       get :show, id: user.id
 
-      expect(json).to be_json_eq UserSerializer.new(user)
+    expect(json).to be_json_eq UserSerializer.new(user)
     end
   end
 end

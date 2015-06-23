@@ -18,8 +18,6 @@ describe User do
   it { is_expected.not_to allow_value("example.com").for(:email) }
   it { is_expected.not_to allow_value("foo;@example.com").for(:email) }
 
-
- describe User do
   context "user password should be a minimum of 8 characters"
   it do
     should validate_length_of(:password).
@@ -32,9 +30,9 @@ describe User do
     it { is_expected.to validate_uniqueness_of(:email) }
   end
 
-    context "user password should be present"
-    it do
-      should validate_presence_of(:password)
-    end
+  context "user password should be present"
+  it do
+    should validate_presence_of(:password)
   end
 end
+
