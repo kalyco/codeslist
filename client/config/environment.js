@@ -2,10 +2,9 @@
 
 module.exports = function(environment) {
   var ENV = {
-    modulePrefix: 'client',
     environment: environment,
     baseURL: '/',
-    locationType: 'auto',
+    locationType: 'hash',
     EmberENV: {
       FEATURES: {
         // Here you can enable experimental features on an ember canary build
@@ -19,29 +18,42 @@ module.exports = function(environment) {
     }
   };
 
+  ENV.torii = {
+    providers: {
+      'github-oauth2': {
+        scope: 'user:email'
+      }
+    }
+  };
+
   if (environment === 'development') {
-    // ENV.APP.LOG_RESOLVER = true;
-    // ENV.APP.LOG_ACTIVE_GENERATION = true;
+    // LOG_MODULE_RESOLVER is needed for pre-1.6.0
+    ENV.LOG_MODULE_RESOLVER = true;
+
+    ENV.APP.LOG_RESOLVER = true;
+    ENV.APP.LOG_ACTIVE_GENERATION = true;
+    ENV.APP.LOG_MODULE_RESOLVER = true;
     // ENV.APP.LOG_TRANSITIONS = true;
     // ENV.APP.LOG_TRANSITIONS_INTERNAL = true;
-    // ENV.APP.LOG_VIEW_LOOKUPS = true;
-  }
+    ENV.APP.LOG_VIEW_LOOKUPS = true;
 
-  if (environment === 'test') {
-    // Testem prefers this...
-    ENV.baseURL = '/';
-    ENV.locationType = 'none';
-
-    // keep test console output quieter
-    ENV.APP.LOG_ACTIVE_GENERATION = false;
-    ENV.APP.LOG_VIEW_LOOKUPS = false;
-
-    ENV.APP.rootElement = '#ember-testing';
+    ENV.host = 'http://localhost:3000';
+    ENV.torii.providers['github-oauth2'].apiKey = '7ba20b9d5eb6cd9ee831';
   }
 
   if (environment === 'production') {
-
+    ENV.host = 'http://ember-cli-rails-oauth-example.herokuapp.com';
+    ENV.torii.providers['github-oauth2'].apiKey = '148a27a37233a18bf596';
   }
+
+  ENV['simple-auth'] = {
+    authorizer: 'simple-auth-authorizer:oauth2-bearer',
+    crossOriginWhitelist: [ENV.host]
+  };
+
+  ENV['simple-auth-oauth2'] = {
+    serverTokenEndpoint: ENV.host + '/api/v1/token'
+  };
 
   return ENV;
 };
