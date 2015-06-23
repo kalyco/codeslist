@@ -5,10 +5,9 @@ ruby '2.2.2'
 
 #gems that are followed by *U-[context]* require manual changes after cloning.
 gem 'airbrake' # *U-api key*
-gem 'active_model_serializers', '~> 0.9.x'
+gem 'active_model_serializers'
 gem 'bcrypt'
 gem 'doorkeeper'
-gem 'ember-cli-rails'
 gem 'normalize-rails'
 gem 'octokit'
 gem 'pg'
@@ -18,7 +17,6 @@ gem 'rack-cors', require: 'rack/cors'
 gem 'rails', '4.2.1'
 gem 'redis'
 gem 'redis-objects'
-gem 'responders'
 gem 'sass-rails', '~> 5.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'sidekiq'

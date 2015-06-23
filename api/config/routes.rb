@@ -3,7 +3,7 @@ Rails.application.routes.draw do
     use_doorkeeper
   end
 
-  namespace :api, defaults: { format: :json } do
+  namespace :api do
     namespace :v1 do
       resource :token, only: [:create]
       resources :users, only: [:show, :create, :update, :destroy]
