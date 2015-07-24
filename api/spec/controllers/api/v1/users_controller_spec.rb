@@ -11,13 +11,14 @@ describe API::V1::UsersController do
     it "returns a user" do
       access_token = FactoryGirl.create(:access_token)
       user = access_token.user
-      mock_access_token_for(user)
 
       expect(User).to receive(:find).with(user.id.to_s) { user }
 
       get :show, id: user.id
 
-      expect(json).to be_json_eq UserSerializer.new(user)
+      binding.pry
+
+      expect(json_response).to be_json_eq UserSerializer.new(user)
     end
   end
 end
